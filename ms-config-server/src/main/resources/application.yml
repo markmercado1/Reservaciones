@@ -1,5 +1,5 @@
 server:
-  port: 5050
+  port: 5959
 
 spring:
   application:
@@ -9,7 +9,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/yheysonramos10/HotelSystem.git # repositorio
+          uri: https://github.com/markmercado1/Reservaciones.git # repositorio
           searchPaths:
             - config-data
           default-label: main

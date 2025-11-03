@@ -1,9 +1,7 @@
 spring:
   application:
-    name: ms-auth-service
+    name: ms-estudiantes
   profiles:
     active: development
   config:
     import: optional:configserver:http://root:123456@localhost:5959
-
-secret: secret
