@@ -6,6 +6,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -34,7 +35,7 @@ public interface RoomServiceClient {
         return new RoomAvailabilityDto(id, false, "Servicio no disponible temporalmente");
     }
 
-    @PutMapping("/{id}/reserve")
+    @PostMapping("/{id}/reserve")
     @CircuitBreaker(name = "roomReserveCB", fallbackMethod = "fallbackReserveRoom")
     void reserveRoom(@PathVariable("id") Long id);
 
@@ -43,7 +44,7 @@ public interface RoomServiceClient {
         throw new RuntimeException("No se pudo reservar la habitación " + id + " - servicio temporalmente indisponible");
     }
 
-    @PutMapping("/{id}/occupy")
+    @PostMapping("/{id}/occupy")
     @CircuitBreaker(name = "roomOccupyCB", fallbackMethod = "fallbackOccupyRoom")
     void occupyRoom(@PathVariable("id") Long id);
 
@@ -52,7 +53,7 @@ public interface RoomServiceClient {
         throw new RuntimeException("No se pudo ocupar la habitación " + id + " - servicio temporalmente indisponible");
     }
 
-    @PutMapping("/{id}/release")
+    @PostMapping("/{id}/release")
     @CircuitBreaker(name = "roomReleaseCB", fallbackMethod = "fallbackReleaseRoom")
     void releaseRoom(@PathVariable("id") Long id);
 
