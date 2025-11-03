@@ -1,0 +1,78 @@
+server:
+  port: ${PORT:${SERVERS_PORT:0}}
+spring:
+  application:
+    name: ms-reservas-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3309/ms_reservas
+    username: root
+    password: 124578369scar@
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8085/eureka}
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+resilience4j.circuitbreaker:
+  instances:
+    roomByIdCB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 4
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+    roomAvailabilityCB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 4
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+    roomReserveCB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 4
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+    roomOccupyCB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 4
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+    roomReleaseCB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 4
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+    studentByIdCB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 4
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
